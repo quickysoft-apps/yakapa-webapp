@@ -72,7 +72,8 @@ class Container extends React.Component {
 
       case Steps.AgentDashboard:
         return {
-          component: <Features.AgentDashboard.Container />
+          component: <Features.AgentDashboard.Container 
+          fallbackAction={() => this._link(Steps.AgentList)}/>
         }
 
       default:
