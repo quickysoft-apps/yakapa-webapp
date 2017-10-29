@@ -57,7 +57,7 @@ class Container extends React.Component {
     </div>
 
     const itemTemplate = Components.ListItemTemplate((ownProps) => {
-      //this.props.setCurrentEndUserEmail({ email: ownProps.email })
+      this.props.setCurrentEndUserAgentTag({ tag: ownProps.tag })
       this.props.itemAction()
     })
 

@@ -6,7 +6,7 @@ const Types = {
 
 const setCurrentEndUserAgentTag = function ({ tag }) {
   return {
-    type: Types.SET_CURRENT_ENDUSER_EMAIL,
+    type: Types.SET_CURRENT_ENDUSER_AGENT_TAG,
     tag
   }
 }
