@@ -9,7 +9,7 @@ export default gql`
       }
     }) 
     {
-      id
+      tag
       updatedAt
       nickname
       endUser {

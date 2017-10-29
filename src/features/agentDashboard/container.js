@@ -3,11 +3,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Actions from './actions'
 import HeaderActions from '../header/actions'
+import Steps from '../../workflows/app/steps'
+import Common from '../../common'
 
 class Container extends React.Component {
 
   componentWillMount() {
-    this.props.setSubtitle({ text: 'blavla' })
+    if (!this.props.currentEndUserAgentTag) {
+      this.props.fallbackAction()
+    } else {
+      this.props.setSubtitle({
+        text: this.props.currentEndUserAgentTag,
+        link: `/app/${Steps.EndUserList}`
+      })      
+    }
   }
 
   render() {
@@ -22,7 +31,7 @@ class Container extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    myState: state.agentDashboard.get('myState')
+    currentEndUserAgentTag: Common.StatePersistence.getCurrentEndUserAgentTag(),
   }
 }
 

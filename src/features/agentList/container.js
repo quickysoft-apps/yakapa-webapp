@@ -5,7 +5,6 @@ import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Namespace from './namespace'
 import Steps from '../../workflows/app/steps'
 
 import { Message } from 'semantic-ui-react'
@@ -29,9 +28,9 @@ class Container extends React.Component {
     if (!this.props.emailContains) {
       this.props.fallbackAction()
     } else {
-      this.props.setSubtitle({ 
+      this.props.setSubtitle({
         text: this.props.emailContains,
-        link: `/app/${Steps.EndUserList}` 
+        link: `/app/${Steps.EndUserList}`
       })
       this.props.subscribeToNewAgents({ email: this.props.emailContains })
     }
@@ -57,7 +56,10 @@ class Container extends React.Component {
       </Message>
     </div>
 
-    const itemTemplate = Components.ListItemTemplate(this.props.itemAction)
+    const itemTemplate = Components.ListItemTemplate((ownProps) => {
+      //this.props.setCurrentEndUserEmail({ email: ownProps.email })
+      this.props.itemAction()
+    })
 
     return (
       <Layout>

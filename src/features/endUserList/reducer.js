@@ -3,7 +3,7 @@ import Actions from './actions'
 import Common from '../../common'
 
 const initialState = new Map({
-  endUser: Common.StatePersistence.getCurrentEndUserEmail()
+  
 })
 
 export default function reducer(state = initialState, action) {

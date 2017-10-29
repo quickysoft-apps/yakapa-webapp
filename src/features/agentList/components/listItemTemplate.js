@@ -11,7 +11,7 @@ export default (onClick) => (
       </List.Content>
       <Avatar name={props.nickname} size={40} />
       <List.Content style={{ display: 'inline-block', paddingLeft: '6px' }}>
-        <List.Header as='a' onClick={onClick}>{props.nickname}</List.Header>
+        <List.Header as='a' onClick={() => onClick(props)}>{props.nickname}</List.Header>
         <List.Description>Mis à jour {moment(props.updatedAt).fromNow()}</List.Description>
       </List.Content>
     </List.Item>
