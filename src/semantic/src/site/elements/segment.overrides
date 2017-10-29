@@ -1,0 +1,21 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui[class*="very top"].segment {    
+    margin-top: 0;
+    border: 0;    
+    padding-bottom: 0;
+    //box-shadow: 0 4px 6px 0 rgba(34,36,38,.12), 0 4px 12px 0 rgba(34,36,38,.15)
+}
+
+.ui.horizontal.unpadded.basic.segments {
+  border: none;
+  box-shadow: none; 
+  margin: 0px;
+}
+
+.ui.horizontal.unpadded.basic.segments>.segment {
+  border-left: 0px;
+  padding: 0px;
+}

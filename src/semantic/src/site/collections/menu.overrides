@@ -1,0 +1,23 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.secondary.pointing.app-header.menu {
+    border-bottom: 2px solid transparent;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+}
+
+.ui.secondary.inverted.pointing.app-header.menu {
+    border-width: 0px;
+}
+
+.ui.secondary.inverted.pointing.app-header.menu .active.item {   
+    border-color: darken(@blue, 10);
+}
+
+.ui.secondary.pointing.app-header.menu .item {    
+    margin: 0px;    
+}
+

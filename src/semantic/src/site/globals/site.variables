@@ -1,0 +1,46 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@fontName          : 'Raleway';
+@fontSmoothing     : antialiased;
+
+@headerFont        : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+@googleFontName    : @fontName;
+@importGoogleFonts : true;
+@googleFontSizes   : '700,300';
+@googleSubset      : 'latin';
+
+@googleProtocol    : 'https://';
+@googleFontRequest : '@{googleFontName}:@{googleFontSizes}&subset=@{googleSubset}';
+
+//Palette 1
+/*@grey: #5A5050;
+@teal: #3EACA8;
+@blue: #547A82;
+@green: #A2D4AB;
+@olive: #E5EEC1;*/
+
+//Palette 2
+@black: #252527;
+@grey: #5E6062;
+@blue: #6A9FBB;
+@yellow: #DCB54B;
+
+//Palette 3
+/*@grey: #2A363B;
+@violet: #E84A5F;
+@purple: #FF847C;
+@pink: #FECEA8;
+@olive: #99B898;*/
+
+//Palette 4
+/*@blue: #2F9395;
+@yellow: #F7D969;
+@orange: #F16A43;
+@red: #EC1C4B;
+@violet: #A6206A;*/
+
+@primaryColor : @blue;
