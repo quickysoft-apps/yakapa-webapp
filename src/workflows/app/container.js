@@ -65,7 +65,9 @@ class Container extends React.Component {
         return {
           component: <Features.AgentList.Container
             email={currentEmail}
-            addNewAction={() => this._link(Steps.AgentSetup)} />
+            addNewAction={() => this._link(Steps.AgentSetup)} 
+            itemAction={() => this._link(Steps.AgentDashboard)}
+            fallbackAction={() => this._link(Steps.EndUserList)} />
         }
 
       case Steps.AgentDashboard:

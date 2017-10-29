@@ -1,7 +1,8 @@
 import Namespace from './namespace'
 
 const Types = {
-  LOGOUT: `${Namespace}/LOGOUT`
+  LOGOUT: `${Namespace}/LOGOUT`,
+  SET_SUBTITLE: `${Namespace}/SET_SUBTITLE`
 }
 
 const logout = function() {
@@ -10,7 +11,16 @@ const logout = function() {
   }
 }
 
+const setSubtitle = function({text, link}) {
+  return {
+    type: Types.SET_SUBTITLE,
+    text,
+    link
+  }
+}
+
 export default {
   Types, 
-  logout
+  logout,
+  setSubtitle
 }

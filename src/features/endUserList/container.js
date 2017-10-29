@@ -12,6 +12,7 @@ import Common from '../../common'
 
 import Layout from './layout'
 import Actions from './actions'
+import HeaderActions from '../header/actions'
 import Components from './components'
 import Repository from './repository'
 
@@ -32,6 +33,9 @@ class Container extends React.Component {
     } else {
       if (this.props.endTaskAction) this.props.endTaskAction()
     }
+
+    this.props.setSubtitle({ text: this.props.userEmail })
+
   }
 
   render() {
@@ -57,8 +61,11 @@ class Container extends React.Component {
       <p>Nous ne parvenons pas à afficher la liste de vos client. Veuillez vérifier votre connexion ou essayer ultérieurement.</p>
     </Message>
 
-    const itemTemplate = Components.ListItemTemplate(this.props.itemAction)      
-    
+    const itemTemplate = Components.ListItemTemplate((ownProps) => {
+      this.props.setCurrentEndUserEmail({ email: ownProps.email })
+      this.props.itemAction()
+    })
+
     return (
       <Layout>
         <Common.Components.ItemList
@@ -77,12 +84,13 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
 
   return {
-    auth0UserId: state.auth.get('loggedUser') ? state.auth.get('loggedUser').user_id : undefined
+    auth0UserId: state.auth.get('loggedUser') ? state.auth.get('loggedUser').user_id : undefined,
+    userEmail: state.auth.get('loggedUser') ? state.auth.get('loggedUser').email : undefined    
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators({ ...Actions, ...HeaderActions }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.EndUsers)(Container))

@@ -46,6 +46,14 @@ const getAgentTag = () => {
   return tag
 }
 
+const setCurrenEndUser = (endUser) => {
+  window.localStorage.setItem('endUser', endUser)
+}
+
+const getCurrentEndUser = () => {
+  return window.localStorage.getItem('endUser')    
+}
+
 const setSecret = () => {
   const secret = uuid.v4()
   window.localStorage.setItem('secret', secret)
@@ -69,5 +77,7 @@ export default {
   getSecret,
   checkSecret,
   setAgentTag,
-  getAgentTag
+  getAgentTag,
+  setCurrenEndUser,
+  getCurrentEndUser
 }

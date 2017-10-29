@@ -14,6 +14,11 @@ export default function reducer(state = initialState, action) {
       browserHistory.push('/sign-off')
       return state
 
+    case Actions.Types.SET_SUBTITLE:
+      return state
+        .set('subtitle', action.text)
+        .set('backLink', action.link)
+
     default:
       return state
   }

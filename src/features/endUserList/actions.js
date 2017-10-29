@@ -1,16 +1,17 @@
 import Namespace from './namespace'
 
 const Types = {
-  MY_ACTION: `${Namespace}/MY_ACTION`
+  SET_CURRENT_ENDUSER_EMAIL: `${Namespace}/SET_CURRENT_ENDUSER_EMAIL`
 }
 
-const myAction = function() {
+const setCurrentEndUserEmail = function ({ email }) {
   return {
-    type: Types.MY_ACTION
+    type: Types.SET_CURRENT_ENDUSER_EMAIL,
+    email
   }
 }
 
 export default {
-  Types, 
-  myAction
+  Types,
+  setCurrentEndUserEmail
 }

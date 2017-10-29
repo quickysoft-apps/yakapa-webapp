@@ -5,11 +5,15 @@ import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import Namespace from './namespace'
+import Steps from '../../workflows/app/steps'
+
 import { Message } from 'semantic-ui-react'
 
 import Common from '../../common'
 import Layout from './layout'
 import Actions from './actions'
+import HeaderActions from '../header/actions'
 import Components from './components'
 import Repository from './repository'
 
@@ -17,17 +21,27 @@ class Container extends React.Component {
 
   static propTypes = {
     addNewAction: PropTypes.func.isRequired,
-    itemAction: PropTypes.func
+    itemAction: PropTypes.func,
+    fallbackAction: PropTypes.func
   }
 
   componentWillMount() {
-    this.props.subscribeToNewAgents({ email: this.props.emailContains })
+    if (!this.props.emailContains) {
+      this.props.fallbackAction()
+    } else {
+      this.props.setSubtitle({ 
+        text: this.props.emailContains,
+        link: `/app/${Steps.EndUserList}` 
+      })
+      this.props.subscribeToNewAgents({ email: this.props.emailContains })
+    }
   }
 
   render() {
-    const loading = this.props.agents.loading
-    const error = loading ? undefined : this.props.agents.error
-    const agents = error || loading || !this.props.agents.allAgents ? [] : this.props.agents.allAgents
+    const agentsQuery = this.props.findAgentByEndUserEmailContainsAndCreatedAfter
+    const loading = agentsQuery.loading
+    const error = loading ? undefined : agentsQuery.error
+    const agents = error || loading || !agentsQuery.allAgents ? [] : agentsQuery.allAgents
 
     const errorMessage = <Message error>
       <Message.Header>
@@ -43,9 +57,14 @@ class Container extends React.Component {
       </Message>
     </div>
 
+    const itemTemplate = Components.ListItemTemplate(this.props.itemAction)
+
     return (
       <Layout>
-        <Common.Components.ItemList items={agents} loading={loading} itemTemplate={Components.ListItemTemplate} />
+        <Common.Components.ItemList
+          items={agents}
+          loading={loading}
+          itemTemplate={itemTemplate} />
         {error ? errorMessage : null}
         {agents.length === 0 && !loading && !error ? starter : null}
         {error ? null : <Common.Components.AddNew action={this.props.addNewAction} />}
@@ -59,13 +78,13 @@ function mapStateToProps(state, ownProps) {
 
   return {
     auth0UserId: state.auth.get('loggedUser').user_id,
-    emailContains: state.agentList.get('emailContains'),
+    emailContains: Common.StatePersistence.getCurrentEndUserEmail(),
     agentUpdatedAfter: state.agentList.get('agentUpdatedAfter'),
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators({ ...Actions, ...HeaderActions }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.Agents)(Container))

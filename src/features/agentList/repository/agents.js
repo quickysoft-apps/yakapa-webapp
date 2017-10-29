@@ -4,19 +4,19 @@ import findAgentByEndUserEmailContainsAndCreatedAfter from './findAgentByEndUser
 
 export default compose(
   graphql(findAgentByEndUserEmailContainsAndCreatedAfter, {
-    name: 'agents',
-    props: (props) => {      
+    //name: 'agents',
+    props: (props) => {
       return {
         subscribeToNewAgents: (params) => {
-          return props.agents.subscribeToMore({
+          return props.data.subscribeToMore({
             document: subscribeToAgentsByEmailContains,
-            variables: { emailContains: params.emailContains },
+            variables: { emailContains: params.email },
             updateQuery: (previousQueryResult, options) => {
-              const agent = options.subscriptionData.data.Agent.node    
+              const agent = options.subscriptionData.data.Agent.node
               let allAgents = previousQueryResult.allAgents ? [...previousQueryResult.allAgents] : []
 
               if (options.subscriptionData.data.Agent.mutation === "CREATED") {
-                console.debug('Agent added', agent)                
+                console.debug('Agent added', agent)
                 allAgents = [...allAgents, agent]
               }
 
@@ -24,10 +24,10 @@ export default compose(
                 const index = allAgents.findIndex(x => x.id === options.subscriptionData.data.Agent.previousValues.id)
                 if (index !== -1) {
                   console.debug('Agent deleted', agent)
-                  allAgents.splice(index,1)
-                }  
+                  allAgents.splice(index, 1)
+                }
               }
-              
+
               return { allAgents }
             },
             onError: (err) => {
@@ -35,7 +35,7 @@ export default compose(
             }
           })
         },
-        agents: props.agents
+        findAgentByEndUserEmailContainsAndCreatedAfter: props.data
       }
     }
   })

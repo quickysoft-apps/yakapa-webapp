@@ -7,15 +7,15 @@ const GRAPHCOOL_YAKAPA_ID = 'Yakapa'//'cixri1w220iji0121r8lr0n69'
 export default () => {
 
   const networkInterface = createNetworkInterface({
-    uri: `https://api.graph.cool/simple/v1/${GRAPHCOOL_YAKAPA_ID}`,
+    uri: `https://api.graph.cool/simple/v1/${GRAPHCOOL_YAKAPA_ID}`/*,
     opts: {
       credentials: 'same-origin'
-    }
+    }*/
   })
 
   const subscriptionClient = new SubscriptionClient(`wss://subscriptions.graph.cool/v1/${GRAPHCOOL_YAKAPA_ID}`, {
     reconnect: true,
-    timeout: 90000,
+    timeout: 20000,
     connectionCallback: (error) => {
       if (error) {
         console.log('SubscriptionClient error', error)
@@ -42,8 +42,6 @@ subscriptionClient.onConnected(() => {
   subscriptionClient.onReconnected(() => {
     console.info('Subscription Client reconnected.')
   })
-
-
 
   const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
     networkInterface,

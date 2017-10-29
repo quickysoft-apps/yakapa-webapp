@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query getAgents($emailContains: String, $agentUpdatedAfter: DateTime) {
+  query findAgentByEndUserEmailContainsAndCreatedAfter($emailContains: String, $agentUpdatedAfter: DateTime) {
     allAgents(orderBy: updatedAt_ASC, filter: {       
       updatedAt_gte: $agentUpdatedAfter, 
       endUser: {
