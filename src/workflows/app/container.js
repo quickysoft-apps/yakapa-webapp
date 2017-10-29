@@ -63,7 +63,7 @@ class Container extends React.Component {
       case Steps.AgentList:
         const currentEmail = this.props.history.location.state ? this.props.history.location.state.email : ''
         return {
-          component: <Features.AgentLink.Container
+          component: <Features.AgentList.Container
             email={currentEmail}
             addNewAction={() => this._link(Steps.AgentSetup)} />
         }

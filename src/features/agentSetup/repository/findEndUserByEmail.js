@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query getEndUser($email: String!) {
+  query findEndUserByEmail($email: String!) {
     EndUser(email: $email) {
       id
       email

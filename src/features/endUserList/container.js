@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import gql from 'graphql-tag'
-import { graphql, compose } from 'react-apollo'
+import { compose } from 'react-apollo'
 
 import { Message } from 'semantic-ui-react'
 
@@ -14,6 +13,7 @@ import Common from '../../common'
 import Layout from './layout'
 import Actions from './actions'
 import Components from './components'
+import Repository from './repository'
 
 class Container extends React.Component {
 
@@ -25,7 +25,7 @@ class Container extends React.Component {
   }
 
   componentWillMount() {
-    const loading = this.props.getEndUsersByUser.loading
+    const loading = this.props.findEndUsersByUser.loading
 
     if (loading) {
       if (this.props.beginTaskAction) this.props.beginTaskAction()
@@ -35,9 +35,9 @@ class Container extends React.Component {
   }
 
   render() {
-    const loading = this.props.getEndUsersByUser.loading
-    const error = loading ? undefined : this.props.getEndUsersByUser.error
-    const endUsers = error || loading ? [] : this.props.getEndUsersByUser.User ? this.props.getEndUsersByUser.User.endUsers : []
+    const loading = this.props.findEndUsersByUser.loading
+    const error = loading ? undefined : this.props.findEndUsersByUser.error
+    const endUsers = error || loading ? [] : this.props.findEndUsersByUser.User ? this.props.findEndUsersByUser.User.endUsers : []
 
     if (error) {
       console.error(error)
@@ -85,23 +85,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-const QUERY_GET_ENDUSERS_BY_USER = gql`
- query getEndUsers($auth0UserId: String!) {
-  User(auth0UserId: $auth0UserId) {
-    endUsers {      
-      email,
-      fullName      
-    }
-  }
-}`
-const ContainerWithApollo = compose(
-  graphql(QUERY_GET_ENDUSERS_BY_USER, {
-    props: ({ data }) => ({
-      getEndUsersByUser: data
-    })
-  })
-)(Container)
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContainerWithApollo)
+export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.EndUsers)(Container))
 

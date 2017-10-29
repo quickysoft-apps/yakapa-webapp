@@ -59,8 +59,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     auth0UserId: state.auth.get('loggedUser').user_id,
-    emailContains: state.agentLink.get('emailContains'),
-    agentUpdatedAfter: state.agentLink.get('agentUpdatedAfter'),
+    emailContains: state.agentList.get('emailContains'),
+    agentUpdatedAfter: state.agentList.get('agentUpdatedAfter'),
   }
 }
 

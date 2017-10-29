@@ -9,7 +9,9 @@ export default compose(
       return (!props.email || props.email === '')
     },
     props: (props) => {
-      return { endUser: props.data.EndUser }
+      return { 
+        findEndUserByEmail: props.data 
+      }
     }
   }),
   graphql(createEndUser, {

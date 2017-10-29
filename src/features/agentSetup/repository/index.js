@@ -1,9 +1,9 @@
-import Agent from './agent'
-import EndUser from './endUser'
-import User from './user'
+import Agents from './agents'
+import EndUsers from './endUsers'
+import Users from './users'
 
 export default {
-  Agent,
-  EndUser,
-  User
+  Agents,
+  EndUsers,
+  Users
 }

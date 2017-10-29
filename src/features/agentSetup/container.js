@@ -21,18 +21,22 @@ class Container extends React.Component {
 
   _emailChanged = (e) => {
     const value = e.target.value
-    if (e.type === 'blur' || (e.type === 'keypress' && e.charCode === 13)) {
-      this.props.setEmail({ email: value })
-    }
+    //if (e.type === 'blur' || (e.type === 'keypress' && e.charCode === 13)) {
+    this.props.setEmail({ email: value })
+    //}
   }
 
   _handleSubmit = (e, data) => {
     e.preventDefault()
-    const userName = Generators.generateEndUserName() //En attendant de saisir plus d'informations            
-    if (this.props.endUser) {
-      this.props.attachUserToEndUser()
+    const userName = Generators.generateEndUserName() //En attendant de saisir plus d'informations               
+    const endUser = this.props.findEndUserByEmail.EndUser
+    const user = this.props.findUserByAuth0Id.User
+    if (endUser) {
+      this.props.attachUserToEndUser(user, endUser).then(() => {
+        this.props.nextAction({ email: this.props.email })
+      })
     } else {
-      this.props.createEndUser(this.props.email, userName, this.props.user.id)
+      this.props.createEndUser(this.props.email, userName, user.id)
         .then(() => {
           this.props.nextAction({ email: this.props.email })
         })
@@ -45,14 +49,19 @@ class Container extends React.Component {
   }
 
   render() {
+
+    const findEndUserByEmail = this.props.findEndUserByUser
+    const findUserByAuth0Id = this.props.findUserByAuth0Id
+    const loading = (findEndUserByEmail && findEndUserByEmail.loading) || (findUserByAuth0Id && findUserByAuth0Id.loading)
+
     return (
       <Form method='post' onSubmit={this._handleSubmit} >
         <Form.Field>
           <label>Email de votre client</label>
-          <input type="email" name="email" placeholder='dave.null@mail.com' onBlur={this._emailChanged} onKeyPress={this._emailChanged} required />
+          <input type="email" name="email" placeholder='dave.null@mail.com' onChange={this._emailChanged} onKeyPress={this._emailChanged} required />
         </Form.Field>
         <Form.Group>
-          <Form.Button primary type='submit'>OK</Form.Button>
+          <Form.Button primary type='submit' disabled={loading}>OK</Form.Button>
           <Form.Button onClick={this._handleCancel}>Annuler</Form.Button>
         </Form.Group>
       </Form>
@@ -72,5 +81,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.EndUser, Repository.User)(Container))
+export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.EndUsers, Repository.Users)(Container))
 
