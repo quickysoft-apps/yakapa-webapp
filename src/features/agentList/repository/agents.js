@@ -4,7 +4,11 @@ import findAgentByEndUserEmailContainsAndCreatedAfter from './findAgentByEndUser
 
 export default compose(
   graphql(findAgentByEndUserEmailContainsAndCreatedAfter, {
-    //name: 'agents',
+    options: (props) => {
+      return {
+        variables: { emailContains: props.endUserListSelection ? props.endUserListSelection.email : '' }
+      }
+    },
     props: (props) => {
       return {
         subscribeToNewAgents: (params) => {

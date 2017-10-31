@@ -8,12 +8,12 @@ import Steps from '../../workflows/app/steps'
 class Container extends React.Component {
 
   componentWillMount() {
-    if (!this.props.agentListSelection) {
+    if (!this.props.agentListSelection || !this.props.endUserListSelection) {
       this.props.fallbackAction()
     } else {
       this.props.setSubtitle({
-        text: this.props.agentListSelection.tag,
-        link: `/app/${Steps.EndUserList}`
+        text: this.props.endUserListSelection.email,
+        link: `/app/${Steps.AgentList}`
       })      
     }
   }
@@ -30,7 +30,8 @@ class Container extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    agentListSelection: state.agentList.get('selection')
+    agentListSelection: state.agentList.get('selection'),
+    endUserListSelection: state.endUserList.get('selection')
   }
 }
 
