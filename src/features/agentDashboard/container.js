@@ -7,17 +7,18 @@ import Steps from '../../workflows/app/steps'
 
 class Container extends React.Component {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     if (!this.props.agentListSelection || !this.props.endUserListSelection) {
       this.props.fallbackAction()
     } else {
       this.props.setSubtitle({
         text: this.props.endUserListSelection.email,
         link: `/app/${Steps.AgentList}`
-      })      
+      })
     }
   }
-
+  
   render() {
     return (
       <div>

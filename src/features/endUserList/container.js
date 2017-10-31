@@ -19,23 +19,13 @@ import Repository from './repository'
 class Container extends React.Component {
 
   static propTypes = {
-    beginTaskAction: PropTypes.func,
-    endTaskAction: PropTypes.func,
     addNewAction: PropTypes.func.isRequired,
     itemAction: PropTypes.func.isRequired
   }
 
-  componentWillMount() {
-    const loading = this.props.findEndUsersByUser.loading
-
-    if (loading) {
-      if (this.props.beginTaskAction) this.props.beginTaskAction()
-    } else {
-      if (this.props.endTaskAction) this.props.endTaskAction()
-    }
-
+  constructor(props) {
+    super(props)
     this.props.setSubtitle({ text: this.props.userEmail })
-
   }
 
   render() {

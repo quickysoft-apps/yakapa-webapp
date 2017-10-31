@@ -24,7 +24,8 @@ class Container extends React.Component {
     fallbackAction: PropTypes.func
   }
 
-  componentWillMount() {
+  constructor(props) {
+    super(props)
     if (!this.props.endUserListSelection) {
       this.props.fallbackAction()
     } else {
