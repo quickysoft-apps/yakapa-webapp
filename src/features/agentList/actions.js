@@ -1,17 +1,17 @@
 import Namespace from './namespace'
 
 const Types = {
-  SET_CURRENT_ENDUSER_AGENT_TAG: `${Namespace}/SET_CURRENT_ENDUSER_AGENT_TAG`
+  SELECT: `${Namespace}/SELECT`
 }
 
-const setCurrentEndUserAgentTag = function ({ tag }) {
+const select = function ({ tag }) {
   return {
-    type: Types.SET_CURRENT_ENDUSER_AGENT_TAG,
+    type: Types.SELECT,
     tag
   }
 }
 
 export default {
   Types,
-  setCurrentEndUserAgentTag
+  select
 }

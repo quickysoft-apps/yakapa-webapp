@@ -25,14 +25,14 @@ class Container extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.emailContains) {
+    if (!this.props.endUserListSelection) {
       this.props.fallbackAction()
     } else {
       this.props.setSubtitle({
-        text: this.props.emailContains,
+        text: this.props.endUserListSelection.email,
         link: `/app/${Steps.EndUserList}`
       })
-      this.props.subscribeToNewAgents({ email: this.props.emailContains })
+      this.props.subscribeToNewAgents({ email: this.props.endUserListSelection.email })
     }
   }
 
@@ -57,7 +57,7 @@ class Container extends React.Component {
     </div>
 
     const itemTemplate = Components.ListItemTemplate((ownProps) => {
-      this.props.setCurrentEndUserAgentTag({ tag: ownProps.tag })
+      this.props.select({ tag: ownProps.tag })
       this.props.itemAction()
     })
 
@@ -80,7 +80,7 @@ function mapStateToProps(state, ownProps) {
 
   return {
     auth0UserId: state.auth.get('loggedUser').user_id,
-    emailContains: Common.StatePersistence.getCurrentEndUserEmail(),
+    endUserListSelection: state.endUserList.get('selection'),
     agentUpdatedAfter: state.agentList.get('agentUpdatedAfter'),
   }
 }

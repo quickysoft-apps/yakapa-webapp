@@ -4,16 +4,15 @@ import { bindActionCreators } from 'redux'
 import Actions from './actions'
 import HeaderActions from '../header/actions'
 import Steps from '../../workflows/app/steps'
-import Common from '../../common'
 
 class Container extends React.Component {
 
   componentWillMount() {
-    if (!this.props.currentEndUserAgentTag) {
+    if (!this.props.agentListSelection) {
       this.props.fallbackAction()
     } else {
       this.props.setSubtitle({
-        text: this.props.currentEndUserAgentTag,
+        text: this.props.agentListSelection.tag,
         link: `/app/${Steps.EndUserList}`
       })      
     }
@@ -31,7 +30,7 @@ class Container extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentEndUserAgentTag: Common.StatePersistence.getCurrentEndUserAgentTag(),
+    agentListSelection: state.agentList.get('selection')
   }
 }
 

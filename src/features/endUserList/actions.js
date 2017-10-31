@@ -1,17 +1,17 @@
 import Namespace from './namespace'
 
 const Types = {
-  SET_CURRENT_ENDUSER_EMAIL: `${Namespace}/SET_CURRENT_ENDUSER_EMAIL`
+  SELECT: `${Namespace}/SELECT`
 }
 
-const setCurrentEndUserEmail = function ({ email }) {
+const select = function ({ email }) {
   return {
-    type: Types.SET_CURRENT_ENDUSER_EMAIL,
+    type: Types.SELECT,
     email
   }
 }
 
 export default {
   Types,
-  setCurrentEndUserEmail
+  select
 }

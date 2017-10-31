@@ -62,7 +62,7 @@ class Container extends React.Component {
     </Message>
 
     const itemTemplate = Components.ListItemTemplate((ownProps) => {
-      this.props.setCurrentEndUserEmail({ email: ownProps.email })
+      this.props.select({ email: ownProps.email })
       this.props.itemAction()
     })
 
