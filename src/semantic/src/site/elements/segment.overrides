@@ -10,12 +10,20 @@
 }
 
 .ui.horizontal.unpadded.basic.segments {
-  border: none;
-  box-shadow: none; 
+  box-shadow: @basicBoxShadow;
+  border: @basicBorder;
+  border-radius: @basicBorderRadius;
   margin: 0px;
 }
 
 .ui.horizontal.unpadded.basic.segments>.segment {
   border-left: 0px;
   padding: 0px;
+}
+
+.ui.attached.basic.segment {
+  background: @basicBackground;
+  box-shadow: @basicBoxShadow;
+  border: @basicBorder;
+  border-radius: @basicBorderRadius;
 }

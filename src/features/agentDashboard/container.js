@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Layout from './layout'
 import Actions from './actions'
-import Header from '../header'
+import HeaderActions from '../header/actions'
 import Workflows from '../../workflows/'
+import { Tab } from 'semantic-ui-react'
+import Components from './components'
 
-import { Radio } from 'semantic-ui-react'
+const panes = [  
+  { menuItem: 'Général', render: () => <Tab.Pane className="basic">Rien</Tab.Pane> },
+  { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.GeneralSettings /></Tab.Pane> },
+  { menuItem: 'Tâches programmées', render: () => <Tab.Pane className="basic">Rien</Tab.Pane> },
+]
 
 class Container extends React.Component {
 
@@ -26,8 +32,8 @@ class Container extends React.Component {
   render() {
     return (
       <Layout>
-        <Radio toggle>Activer cet agent</Radio>
-      </Layout>
+        <Tab basic menu={{ stackable: true, pointing: true, secondary: true }} panes={panes} />
+      </Layout >
     )
   }
 
@@ -41,7 +47,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...Actions, ...Header.Actions }, dispatch)
+  return bindActionCreators({ ...Actions, ...HeaderActions }, dispatch)
 }
 
 
