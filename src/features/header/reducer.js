@@ -11,8 +11,12 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
 
     case Actions.Types.LOGOUT:
-      browserHistory.push('/sign-off')
+      browserHistory.push('/sign-off') 
       return state
+
+    case Actions.Types.SET_TITLE:
+      return state
+        .set('title', action.text)        
 
     case Actions.Types.SET_SUBTITLE:
       return state

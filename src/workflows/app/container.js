@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import Layout from './layout'
 import Features from '../../features'
 import Actions from './actions'
+
 import Steps from './steps'
 
 import Common from '../../common'
@@ -13,11 +14,11 @@ import Namespace from './namespace'
 
 class Container extends React.Component {
 
-  _link = (step, state) => {    
+  _link = (step, state) => {
     this.props.history.push({
       pathname: `/${Namespace}/${step}`,
       state
-    })    
+    })
   }
 
   _getMenuItems = (items) => {
@@ -35,7 +36,7 @@ class Container extends React.Component {
 
       case Steps.EndUserList:
         return {
-          component: <Features.EndUserList.Container            
+          component: <Features.EndUserList.Container
             addNewAction={() => this._link(Steps.AgentSetup)}
             itemAction={() => this._link(Steps.AgentList)}
           />/*,
@@ -65,15 +66,15 @@ class Container extends React.Component {
         return {
           component: <Features.AgentList.Container
             email={currentEmail}
-            addNewAction={() => this._link(Steps.AgentSetup)} 
+            addNewAction={() => this._link(Steps.AgentSetup)}
             itemAction={() => this._link(Steps.AgentDashboard)}
             fallbackAction={() => this._link(Steps.EndUserList)} />
         }
 
       case Steps.AgentDashboard:
         return {
-          component: <Features.AgentDashboard.Container 
-          fallbackAction={() => this._link(Steps.AgentList)}/>
+          component: <Features.AgentDashboard.Container
+            fallbackAction={() => this._link(Steps.AgentList)} />
         }
 
       default:
@@ -84,17 +85,16 @@ class Container extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.currentStep !== this.props.currentStep) {
+      this.props.setTitle({ text: this.props.steps.get(nextProps.currentStep) })
+    }
     if (nextProps.location.pathname !== this.props.location.pathname) {
-      this
-        .props
-        .locationChanged({ location: nextProps.location })
+      this.props.locationChanged({ location: nextProps.location })
     }
   }
 
   componentWillMount() {
-    this
-      .props
-      .locationChanged({ location: this.props.location })
+    this.props.locationChanged({ location: this.props.location })
   }
 
   render() {
@@ -113,12 +113,13 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     currentStep: state.app.get('currentStep'),
-    loggedUser: state.auth.get('loggedUser')
+    loggedUser: state.auth.get('loggedUser'),
+    steps: new Map(state.app.get('steps').toJS())
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators({ ...Actions, ...Features.Header.Actions }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container)

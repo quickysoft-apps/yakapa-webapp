@@ -1,9 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Layout from './layout'
 import Actions from './actions'
-import HeaderActions from '../header/actions'
-import Steps from '../../workflows/app/steps'
+import Header from '../header'
+import Workflows from '../../workflows/'
+
+import { Radio } from 'semantic-ui-react'
 
 class Container extends React.Component {
 
@@ -12,18 +15,19 @@ class Container extends React.Component {
     if (!this.props.agentListSelection || !this.props.endUserListSelection) {
       this.props.fallbackAction()
     } else {
+      this.props.setTitle({ text: this.props.agentListSelection.nickname })
       this.props.setSubtitle({
         text: this.props.endUserListSelection.email,
-        link: `/app/${Steps.AgentList}`
+        link: `/app/${Workflows.App.Steps.AgentList}`
       })
     }
   }
-  
+
   render() {
     return (
-      <div>
-
-      </div>
+      <Layout>
+        <Radio toggle>Activer cet agent</Radio>
+      </Layout>
     )
   }
 
@@ -37,7 +41,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...Actions, ...HeaderActions }, dispatch)
+  return bindActionCreators({ ...Actions, ...Header.Actions }, dispatch)
 }
 
 

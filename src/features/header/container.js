@@ -71,10 +71,10 @@ class Container extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const steps = state.app.get('steps').toJS()
+
   return {
     currentStep: state.app.get('currentStep'),
-    titleText: new Map(steps).get(state.app.get('currentStep')),
+    titleText: state.header.get('title'),
     subtitleText: state.header.get('subtitle'),
     backLink: state.header.get('backLink'),
     taskIsProgressing: state.app.get('taskIsProgressing'),

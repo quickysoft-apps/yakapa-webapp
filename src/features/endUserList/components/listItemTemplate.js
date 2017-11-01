@@ -9,7 +9,7 @@ export default (onClick) => (
       <List.Content floated='right'>
         <Icon disabled color='grey' size='big' name='circle' style={{ paddingTop: '6px' }}></Icon>
       </List.Content>
-      <Avatar name={props.fullName} size={40} />
+      <Avatar name={props.fullName} size={32} />
       <List.Content style={{ display: 'inline-block', paddingLeft: '6px' }}>
         <List.Header as='a' onClick={() => onClick(props)}>{props.email}</List.Header>
         <List.Description>{props.fullName}</List.Description>

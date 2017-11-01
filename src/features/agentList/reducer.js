@@ -11,7 +11,10 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
 
     case Actions.Types.SELECT:
-      return state.set('selection', { tag: action.tag })      
+      return state.set('selection', {
+        tag: action.tag,
+        nickname: action.nickname
+      })
 
     default:
       return state

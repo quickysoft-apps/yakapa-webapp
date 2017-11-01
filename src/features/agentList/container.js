@@ -5,14 +5,14 @@ import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import Steps from '../../workflows/app/steps'
+import Header from '../header'
+import Workflows from '../../workflows/'
 
 import { Message } from 'semantic-ui-react'
 
 import Common from '../../common'
 import Layout from './layout'
 import Actions from './actions'
-import HeaderActions from '../header/actions'
 import Components from './components'
 import Repository from './repository'
 
@@ -31,7 +31,7 @@ class Container extends React.Component {
     } else {
       this.props.setSubtitle({
         text: this.props.endUserListSelection.email,
-        link: `/app/${Steps.EndUserList}`
+        link: `/app/${Workflows.App.Steps.EndUserList}`
       })
       this.props.subscribeToNewAgents({ email: this.props.endUserListSelection.email })
     }
@@ -58,7 +58,10 @@ class Container extends React.Component {
     </div>
 
     const itemTemplate = Components.ListItemTemplate((ownProps) => {
-      this.props.select({ tag: ownProps.tag })
+      this.props.select({
+        tag: ownProps.tag,
+        nickname: ownProps.nickname
+      })
       this.props.itemAction()
     })
 
@@ -87,7 +90,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...Actions, ...HeaderActions }, dispatch)
+  return bindActionCreators({ ...Actions, ...Header.Actions }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.Agents)(Container))
