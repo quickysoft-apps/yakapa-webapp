@@ -9,10 +9,10 @@ class GeneralSettings extends React.Component {
       <Item.Group>
         <Item>
           <Item.Content>
-            <Item.Header>Activer cet agent pour la collecte de données</Item.Header>
+            <Item.Header>Activer la collecte de données</Item.Header>
             <Item.Description>
               Vous pouvez configurer l'agent à distance pour lui indiquer si les données qu'il peut collecter vous sont envoyées.
-                Vous continuerez cependant à recevoir des indications sur son fonctionnement.
+              Même si la collecte n'est pas activée, vous continuerez à recevoir des indications sur le fonctionnement de l'agent.
               </Item.Description>
             <Item.Extra>
               <Radio toggle checked disabled />
