@@ -3318,3 +3318,6 @@ i.icon.times.rectangle.outline:before {
          Site Overrides
 *******************************/
 
+i.circular.icon {
+  padding: .5em 0em!important;
+}

@@ -4,15 +4,15 @@ import { List, Icon } from 'semantic-ui-react'
 import Avatar from 'react-avatar'
 
 export default (onClick) => (
-  (props) => (
-    <List.Item>
+  (item, index) => (
+    <List.Item key={index}>
       <List.Content floated='right'>
-        <Icon disabled color='grey' size='big' name='circle' style={{ paddingTop: '6px' }}></Icon>
+        <Icon disabled color='grey' size='big' name='circle' style={{ paddingTop: '2px' }}></Icon>
       </List.Content>
-      <Avatar name={props.fullName} size={32} />
+      <Avatar name={item.fullName} size={32} />
       <List.Content style={{ display: 'inline-block', paddingLeft: '6px' }}>
-        <List.Header as='a' onClick={() => onClick(props)}>{props.email}</List.Header>
-        <List.Description>{props.fullName}</List.Description>
+        <List.Header as='a' onClick={() => onClick(item)}>{item.email}</List.Header>
+        <List.Description>{item.fullName}</List.Description>
       </List.Content>
     </List.Item>
   )

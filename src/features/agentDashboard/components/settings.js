@@ -1,7 +1,7 @@
 import React from 'react'
 import { Item, Radio } from 'semantic-ui-react'
 
-class GeneralSettings extends React.Component {
+class Settings extends React.Component {
 
 
   render() {
@@ -26,4 +26,4 @@ class GeneralSettings extends React.Component {
 }
 
 
-export default GeneralSettings
+export default Settings

@@ -1,5 +1,9 @@
-import GeneralSettings from './generalSettings'
+import ListItemTemplate from './listItemTemplate'
+import Stats from './stats'
+import Settings from './settings'
 
-export default {
-    GeneralSettings
+export default {    
+    ListItemTemplate,
+    Stats,
+    Settings
 }

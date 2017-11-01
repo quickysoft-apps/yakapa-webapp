@@ -5,13 +5,16 @@ import Layout from './layout'
 import Actions from './actions'
 import HeaderActions from '../header/actions'
 import Workflows from '../../workflows/'
-import { Tab } from 'semantic-ui-react'
 import Components from './components'
+import { Tab } from 'semantic-ui-react'
 
-const panes = [  
-  { menuItem: 'Général', render: () => <Tab.Pane className="basic">Rien</Tab.Pane> },
-  { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.GeneralSettings /></Tab.Pane> },
-  { menuItem: 'Tâches programmées', render: () => <Tab.Pane className="basic">Rien</Tab.Pane> },
+
+
+
+const panes = [
+  { menuItem: 'Statistiques', render: () => <Tab.Pane className="basic"><Components.Stats/></Tab.Pane> },
+  { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings/></Tab.Pane> },
+  { menuItem: 'Tâches', render: () => <Tab.Pane className="basic">Liste des tâches</Tab.Pane> },
 ]
 
 class Container extends React.Component {
@@ -30,9 +33,10 @@ class Container extends React.Component {
   }
 
   render() {
+
     return (
       <Layout>
-        <Tab basic menu={{ stackable: true, pointing: true, secondary: true }} panes={panes} />
+        <Tab menu={{ stackable: true, secondary: true, pointing: true }} panes={panes} />
       </Layout >
     )
   }
