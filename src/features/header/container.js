@@ -32,7 +32,7 @@ class Container extends React.Component {
         </div>
         <Segment basic className="very top">
           <Grid>
-            <Grid.Row color="blue" columns="equal">
+            <Grid.Row centered color="blue" columns="equal">
               <Grid.Column verticalAlign='middle'>
               </Grid.Column>
               <Grid.Column textAlign="center" verticalAlign="middle">

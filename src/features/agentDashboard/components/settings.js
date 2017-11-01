@@ -10,9 +10,9 @@ class Settings extends React.Component {
         <Item>
           <Item.Content>
             <Item.Header>Identification de l'agent</Item.Header>
-            <Item.Description>Vous pouvez changer le nom par lequel reconnaître cet agent parmi plusieurs
+            <Item.Description>Vous pouvez changer le nom avec lequel vous pouvez reconnaître cet agent parmi plusieurs autres
             agents installés sur un site. Vous ne pouvez en revanche modifier l'email de contact de l'utilisateur
-            final rattaché à cet agent.
+            final qui possède cet agent.
           </Item.Description>
             <Item.Extra>
               <Form method='post'>
