@@ -1,12 +1,31 @@
 import React from 'react'
-import { Item, Radio } from 'semantic-ui-react'
+import { Item, Radio, Form } from 'semantic-ui-react'
 
 class Settings extends React.Component {
 
 
   render() {
     return (
-      <Item.Group>
+      <Item.Group divided>
+        <Item>
+          <Item.Content>
+            <Item.Header>Identification de l'agent</Item.Header>
+            <Item.Description>Vous pouvez changer le nom par lequel reconnaître cet agent parmi plusieurs
+            agents installés sur un site. Vous ne pouvez en revanche modifier l'email de contact de l'utilisateur
+            final rattaché à cet agent.
+          </Item.Description>
+            <Item.Extra>
+              <Form method='post'>
+                <Form.Field width="eight">                  
+                  <input type="text" name="identifier" placeholder='Agent Secret 007' required />
+                </Form.Field>
+                <Form.Group>
+                  <Form.Button primary type='submit'>Enregistrer</Form.Button>
+                </Form.Group>
+              </Form>
+            </Item.Extra>
+          </Item.Content>
+        </Item>
         <Item>
           <Item.Content>
             <Item.Header>Activer la collecte de données</Item.Header>
