@@ -80,7 +80,6 @@ class Container extends React.Component {
 
       default:
         return <div>Not found</div>
-
     }
 
   }
@@ -95,6 +94,7 @@ class Container extends React.Component {
   }
 
   componentWillMount() {
+    this.props.setTitle({ text: this.props.steps.get(this.props.currentStep) })
     this.props.locationChanged({ location: this.props.location })
   }
 

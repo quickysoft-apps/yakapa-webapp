@@ -1,12 +1,12 @@
 import React from 'react'
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import { compose } from 'react-apollo'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import Common from '../../common'
 import Actions from './actions'
+import Repository from './repository'
 
 class Container extends React.Component {
 
@@ -48,14 +48,6 @@ class Container extends React.Component {
   }
 
 }
-
-const MUTATION_CREATE_USER = gql`
-  mutation createUser($idToken: String!, $tag: String!) {
-    createUser(tag: $tag, authProvider: {auth0: {idToken: $idToken}}) {
-      id
-    }
-  }`
-
 function mapStateToProps(state, ownProps) {
 
   return {
@@ -65,14 +57,11 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-const ContainerWithData = graphql(MUTATION_CREATE_USER, { name: 'createUser' })(Container)
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContainerWithData)
+export default connect(mapStateToProps, mapDispatchToProps)(compose(Repository.Users)(Container))
 
 
 
