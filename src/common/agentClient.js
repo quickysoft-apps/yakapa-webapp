@@ -1,12 +1,15 @@
 import * as io from 'socket.io-client'
 import * as LZString from 'lz-string'
-import Sockets from './sockets'
 import Authentication from './authentication'
 import { EventEmitter } from 'events'
 
 const SOCKET_SERVER_URL = 'https://mprj.cloudapp.net'
 const DEFAULT_NICKNAME = 'Yakapa App'
 
+const EVENT_PREFIX = 'yakapa'
+const CHAT = `${EVENT_PREFIX}/chat`
+const RESULT = `${EVENT_PREFIX}/result`
+const AUTHENTICATED = `${EVENT_PREFIX}/authenticated`
 
 class AgentClientEmitter extends EventEmitter {
   doConnected() {
@@ -32,9 +35,7 @@ export class AgentClient {
     this._socket.on('connect_error', (error) => { this.connectionError(error) })
     this._socket.on('error', (error) => { this.socketError(error) })
 
-    this._socket.on(Sockets.Events.AUTHENTICATED, (socketMessage) => { this.authenticated(socketMessage) })
-    this._socket.on(Sockets.Events.CHAT, async (socketMessage) => { await this.understand(socketMessage) })
-    this._socket.on(Sockets.Events.EXECUTE_SCRIPT, async (socketMessage) => { await this.executeScript(socketMessage) })
+    this._socket.on(AUTHENTICATED, (socketMessage) => { this.authenticated(socketMessage) })    
   }
 
   get emitter() {
@@ -66,15 +67,15 @@ export class AgentClient {
     return true
   }
 
-  emit(event = Sockets.Events.RESULT, payload, to) {
+  emit(event = RESULT, payload, to) {
     const tag = Authentication.getAgentTag()    
     const compressed = payload != null ? LZString.compressToUTF16(payload) : null
     const socketMessage = {
       from: tag,
       nickname: DEFAULT_NICKNAME,
       to: to,
-      result: event === Sockets.Events.RESULT ? compressed : null,
-      message: event === Sockets.Events.CHAT ? compressed : null
+      result: event === RESULT ? compressed : null,
+      message: event === CHAT ? compressed : null
     }
 
     this._socket.emit(event, socketMessage)
