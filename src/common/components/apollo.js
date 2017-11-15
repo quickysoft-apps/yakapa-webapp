@@ -2,13 +2,13 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 
 import configureStore from '../configureStore'
-import configureApolloClient from '../configureApolloClient'
+import { configureApolloClientWithSubscriptions } from '../configureApolloClient'
 
 export default class Apollo extends React.Component {
 
   constructor(props) {
     super(props)
-    this.client = configureApolloClient()
+    this.client = configureApolloClientWithSubscriptions()
     this.store = configureStore(this.client, {})
   }
 

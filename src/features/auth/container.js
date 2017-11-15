@@ -48,8 +48,7 @@ class Container extends React.Component {
   }
 
 }
-function mapStateToProps(state, ownProps) {
-
+function mapStateToProps(state, ownProps) {  
   return {
     loggedUser: state.auth.get('loggedUser'),
     isAuthenticated: state.auth.get('isAuthenticated'),

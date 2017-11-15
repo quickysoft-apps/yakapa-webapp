@@ -4,7 +4,7 @@ import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-trans
 
 const GRAPHCOOL_YAKAPA_ID = 'Yakapa'//'cixri1w220iji0121r8lr0n69'
 
-export default () => {
+export const configureApolloClientWithSubscriptions = () => {
 
   const networkInterface = createNetworkInterface({
     uri: `https://api.graph.cool/simple/v1/${GRAPHCOOL_YAKAPA_ID}`/*,
@@ -55,3 +55,20 @@ subscriptionClient.onConnected(() => {
 
   return client
 }
+
+export const configureSimpleApolloClient = () => {
+  
+    const networkInterface = createNetworkInterface({
+      uri: `https://api.graph.cool/simple/v1/${GRAPHCOOL_YAKAPA_ID}`/*,
+      opts: {
+        credentials: 'same-origin'
+      }*/
+    })
+    
+    const client = new ApolloClient({
+      networkInterface,
+      dataIdFromObject: o => o.id
+    })
+  
+    return client
+  }
