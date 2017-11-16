@@ -25,14 +25,6 @@ export default class Secured extends React.Component {
     await this._checkStoredAuthentication()
   }
 
-  async componentWillMount() {
-    //await this._checkStoredAuthentication()
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    //await this._checkStoredAuthentication()
-  }
-
   render() {
     return <div>
       {this.state.isValid ? this.props.children : <Redirect to={this.props.fallback} />}

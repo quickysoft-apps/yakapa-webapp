@@ -94,7 +94,8 @@ class Container extends React.Component {
   }
 
   componentWillMount() {
-    this.props.setTitle({ text: this.props.steps.get(this.props.currentStep) })
+    const steps = new Map(this.props.steps.toJS())
+    this.props.setTitle({ text: steps.get(this.props.currentStep) })
     this.props.locationChanged({ location: this.props.location })
   }
 
@@ -116,7 +117,7 @@ function mapStateToProps(state, ownProps) {
   return {
     currentStep: state.app.get('currentStep'),
     authenticatedUser: state.auth.get('authenticatedUser'),
-    steps: new Map(state.app.get('steps').toJS())
+    steps: state.app.get('steps')
   }
 }
 

@@ -8,15 +8,6 @@ import Workflows from '../../workflows/'
 import Components from './components'
 import { Tab } from 'semantic-ui-react'
 
-
-
-
-const panes = [
-  { menuItem: 'Statistiques', render: () => <Tab.Pane className="basic"><Components.Stats/></Tab.Pane> },
-  { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings/></Tab.Pane> },
-  { menuItem: 'Tâches', render: () => <Tab.Pane className="basic">Liste des tâches</Tab.Pane> },
-]
-
 class Container extends React.Component {
 
   constructor(props) {
@@ -32,7 +23,37 @@ class Container extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.storedValue && nextProps.storedValue) {
+      if (this.props.storedValue.timestamp !== nextProps.storedValue.timestamp) {
+        if (nextProps.storedValue.tag === this.props.agentListSelection.tag) {
+          this.props.stream({
+            definition: {
+              tags: [this.props.agentListSelection.tag],
+              select: ['ping'],
+              query: {
+                name: 'last',
+                params: {}
+              }
+            }
+          })
+        }
+      }
+    }
+  }
+
   render() {
+
+    const panes = [
+      {
+        menuItem: 'Statistiques', render: () =>
+          <Tab.Pane className="basic">
+            <Components.Stats />
+          </Tab.Pane>
+      },
+      { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
+      { menuItem: 'Tâches', render: () => <Tab.Pane className="basic">Liste des tâches</Tab.Pane> },
+    ]
 
     return (
       <Layout>
@@ -46,7 +67,8 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     agentListSelection: state.agentList.get('selection'),
-    endUserListSelection: state.endUserList.get('selection')
+    endUserListSelection: state.endUserList.get('selection'),
+    storedValue: state.agentDashboard.get('storedValue')
   }
 }
 

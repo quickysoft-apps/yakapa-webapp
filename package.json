@@ -43,7 +43,8 @@
     "uuid": "^3.0.1",
     "velocity-animate": "^1.5.0",
     "velocity-react": "^1.2.2",
-    "yakapa-agent-client": "^1.0.5"
+    "yakapa-agent-client": "^1.0.5",
+    "yakapa-common": "^1.0.5"
   },
   "scripts": {
     "start": "cross-env PORT=3005 react-scripts start",

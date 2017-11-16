@@ -1,6 +1,8 @@
-import { } from 'redux'
 import Agent from 'yakapa-agent-client'
+import { Json } from 'yakapa-common'
+import LZString from 'lz-string'
 import AgentClientActions from '../features/agentClient/actions'
+import AgentDashboardActions from '../features/agentDashboard/actions'
 import Authentication from './authentication'
 
 const client = new Agent.Client({
@@ -12,16 +14,11 @@ const client = new Agent.Client({
 export function middleware() {
   return api => next => action => {
     const result = next(action)
-    if (action.type === 'yakapa/stream') {      
-      /*client.emit('yakapa/stream', { 
-        tags: action.payload.tags,
-        select: ['ping'],
-        query: {
-          name: 'last',
-          params: {}          
-        }
-      })*/
+
+    if (action.type === AgentDashboardActions.Types.STREAM) {
+      client.emit('yakapa/stream', JSON.stringify(action.definition))
     }
+
     return result
   }
 }
@@ -29,8 +26,12 @@ export function middleware() {
 export function listen(store) {
 
   client.emitter.on('connected', () => {
-    console.debug("[AGENT] connected")
     store.dispatch(AgentClientActions.connected())
+  })
+
+  client.emitter.on('yakapa/stored', (socketMessage) => {
+    const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))
+    store.dispatch(AgentDashboardActions.stored({ from: decompressed.from }))
   })
 
 }
