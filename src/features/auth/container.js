@@ -10,12 +10,17 @@ import Repository from './repository'
 
 class Container extends React.Component {
 
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     if (this.props.lock) {
       this.props.lock.show(this.props.initialScreen)
     }
     return <div id='login-container' />
   }
+
 
   componentDidMount() {
 
@@ -24,9 +29,9 @@ class Container extends React.Component {
       return this.props.logout({ history: this.props.history })
     }
 
-    //Already authenticated
-    if (this.props.isAuthenticated) {
-      return this.props.toDefault({ history: this.props.history })
+    //Already logged in
+    if (Common.Authentication.getUserFromLocalStorage() && this.props.authenticatedUser) {
+      return this.props.toDefault({ history: this.props.history })      
     }
 
     //Do we need to show the Auth0 lock component ?
@@ -39,6 +44,7 @@ class Container extends React.Component {
     this.props.login({ token })
     this.props.createUser({ variables: { idToken: token, tag: Common.Authentication.getAgentTag() } })
     this.props.toDefault({ history: this.props.history })
+
   }
 
   componentWillUnmount() {
@@ -48,10 +54,9 @@ class Container extends React.Component {
   }
 
 }
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
   return {
-    loggedUser: state.auth.get('loggedUser'),
-    isAuthenticated: state.auth.get('isAuthenticated'),
+    authenticatedUser: state.auth.get('authenticatedUser'),    
     lock: state.auth.get('lock')
   }
 }

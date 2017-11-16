@@ -74,8 +74,8 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
 
   return {
-    auth0UserId: state.auth.get('loggedUser') ? state.auth.get('loggedUser').user_id : undefined,
-    userEmail: state.auth.get('loggedUser') ? state.auth.get('loggedUser').email : undefined    
+    auth0UserId: state.auth.get('authenticatedUser') ? state.auth.get('authenticatedUser').user_id : undefined,
+    userEmail: state.auth.get('authenticatedUser') ? state.auth.get('authenticatedUser').email : undefined    
   }
 }
 

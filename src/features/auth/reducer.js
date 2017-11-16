@@ -8,10 +8,9 @@ const lockConfig = {
   AUTH0_CLIENT_DOMAIN: 'ykp.eu.auth0.com'
 }
 
-const loggedUser = Common.Authentication.getUserFromLocalStorage()
+const authenticatedUser = Common.Authentication.getUserFromLocalStorage()
 const initialState = new Map({
-  loggedUser,
-  isAuthenticated: !!loggedUser
+  authenticatedUser  
 })
 
 const createLock = (secret) => {
@@ -47,15 +46,13 @@ export default function reducer(state = initialState, action) {
     case Actions.Types.LOGIN:
       Common.Authentication.setToken(action.payload.token)
       return state
-        .set('loggedUser', Common.Authentication.getUserFromLocalStorage())
-        .set('isAuthenticated', true)
+        .set('authenticatedUser', Common.Authentication.getUserFromLocalStorage())        
 
     case Actions.Types.LOGOUT:
       Common.Authentication.unsetToken()
       action.history.push('/')
       return state
-        .set('loggedUser', undefined)
-        .set('isAuthenticated', false)
+        .set('authenticatedUser', undefined)        
 
     case Actions.Types.TO_DEFAULT:
       action.history.push('/app')
@@ -70,7 +67,7 @@ export default function reducer(state = initialState, action) {
       if (lock) {
         lock.hide()
         return state.set('lock', undefined)
-      } 
+      }
       return state
 
     default:

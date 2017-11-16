@@ -84,7 +84,7 @@ class Container extends React.Component {
 
   }
 
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {    
     if (nextProps.currentStep !== this.props.currentStep) {
       this.props.setTitle({ text: this.props.steps.get(nextProps.currentStep) })
     }
@@ -97,6 +97,7 @@ class Container extends React.Component {
     this.props.setTitle({ text: this.props.steps.get(this.props.currentStep) })
     this.props.locationChanged({ location: this.props.location })
   }
+
 
   render() {
     const content = this._getContent()
@@ -114,7 +115,7 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     currentStep: state.app.get('currentStep'),
-    loggedUser: state.auth.get('loggedUser'),
+    authenticatedUser: state.auth.get('authenticatedUser'),
     steps: new Map(state.app.get('steps').toJS())
   }
 }

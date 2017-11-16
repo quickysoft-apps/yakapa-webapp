@@ -4,6 +4,7 @@ import Apollo from './apollo'
 import ItemList from './itemList'
 import AddNew from './addNew'
 import ApolloProgress from './nprogress/apolloProgress'
+import Secured from './secured'
 
 export default {
   Transition,
@@ -11,5 +12,6 @@ export default {
   Apollo,
   ItemList,
   AddNew,
-  ApolloProgress
+  ApolloProgress,
+  Secured
 }

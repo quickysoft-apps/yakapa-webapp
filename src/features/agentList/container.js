@@ -83,7 +83,7 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
 
   return {
-    auth0UserId: state.auth.get('loggedUser').user_id,
+    auth0UserId: state.auth.get('authenticatedUser').user_id,
     endUserListSelection: state.endUserList.get('selection'),
     agentUpdatedAfter: state.agentList.get('agentUpdatedAfter'),
   }

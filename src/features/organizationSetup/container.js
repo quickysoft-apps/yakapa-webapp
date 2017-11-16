@@ -8,10 +8,10 @@ class OrganizationSetup extends React.Component {
 
   constructor(props) {
     super(props)
-    const loggedUser = Common.Authentication.getUserFromLocalStorage()
+    const authenticatedUser = Common.Authentication.getUserFromLocalStorage()
     this.state = {
-      loggedUser,
-      isAuthenticated: !!loggedUser
+      authenticatedUser,
+      isAuthenticated: !!authenticatedUser
     }
   }
 
@@ -38,10 +38,10 @@ class OrganizationSetup extends React.Component {
       <Form onSubmit={this.handleSubmit} >
         <Form.Input label='Nom de votre entreprise' name='company' placeholder='Acme Corporation' />
         <Form.Group widths='equal'>
-          <Form.Input label='Prénom' name='firstname' placeholder='First name' defaultValue={this.state.loggedUser.given_name} />
-          <Form.Input label='Nom' name='lastname' placeholder='Last name' defaultValue={this.state.loggedUser.family_name} />
+          <Form.Input label='Prénom' name='firstname' placeholder='First name' defaultValue={this.state.authenticatedUser.given_name} />
+          <Form.Input label='Nom' name='lastname' placeholder='Last name' defaultValue={this.state.authenticatedUser.family_name} />
         </Form.Group>
-        <Form.Input label='Email' name='email' placeholder='acme.company@general.com' defaultValue={this.state.loggedUser.email} />
+        <Form.Input label='Email' name='email' placeholder='acme.company@general.com' defaultValue={this.state.authenticatedUser.email} />
         <Form.Group>
           <Form.Button primary type='submit'>OK</Form.Button>          
           {this.props.skipAction ? <Form.Button onClick={this.handleSkip}>Plus tard<Icon name='right arrow' /></Form.Button> : <div />}

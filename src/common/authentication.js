@@ -1,6 +1,9 @@
 import jwtDecode from 'jwt-decode'
 import uuid from 'uuid'
 
+import { configureSimpleApolloClient } from './configureApolloClient'
+import gql from 'graphql-tag'
+
 const getQueryParams = () => {
   const params = {}
   window.location.href.replace(/([^(?|#)=&]+)(=([^&]*))?/g, ($0, $1, $2, $3) => {
@@ -25,6 +28,7 @@ const unsetToken = () => {
   window.localStorage.removeItem('user')
   window.localStorage.removeItem('secret')
   window.localStorage.removeItem(`com.auth0.auth.${secret}`)
+  window.localStorage.removeItem('agentTag')
   window.localStorage.setItem('logout', Date.now())
 }
 
@@ -60,6 +64,33 @@ const checkSecret = (secret) => {
   return window.localStorage.secret === secret
 }
 
+const checkAuthenticatedUser = async function () {
+  const client = configureSimpleApolloClient()
+  const storedUser = getUserFromLocalStorage()
+  
+  if (!storedUser) {    
+    return false
+  }
+
+  const query = await client.query({
+    query: gql`
+      {
+        User(auth0UserId: "${storedUser.user_id}") {
+          tag
+        }
+      }`
+  })
+
+  if (query.data.User) {
+    setAgentTag(query.data.User.tag)
+    return true
+  } else {
+    unsetToken()
+    return false
+  }
+
+}
+
 export default {
   extractInfoFromHash,
   setToken,
@@ -69,5 +100,6 @@ export default {
   getSecret,
   checkSecret,
   setAgentTag,
-  getAgentTag
+  getAgentTag,
+  checkAuthenticatedUser
 }

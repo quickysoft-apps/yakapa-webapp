@@ -5,6 +5,7 @@ import { Grid, Segment } from 'semantic-ui-react'
 
 import Namespace from './namespace'
 import Features from '../../features'
+import Common from '../../common'
 
 class Layout extends Component {
 

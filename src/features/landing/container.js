@@ -27,8 +27,8 @@ export default class Landing extends React.Component {
           </Container>
 
           <Container text>
-            <Header inverted as='h1'>Yakapa ‒ The Software Care Platform</Header>
-            <h2>Want to handle software installations in complex and versatile environments easely ? Sign up now and join our software care platform.</h2>
+            <Header inverted as='h1'>Live Development Driven Supervisor</Header>
+            <h2>Do you want to handle software supervision in complex and versatile environments easely ? Sign up now and join our revolutionary supervision platform.</h2>
             <Button size='huge' primary onClick={this.signup}>Sign Up</Button>
           </Container>
 
