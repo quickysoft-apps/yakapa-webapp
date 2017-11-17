@@ -13,10 +13,10 @@ const stream = function ({ definition }) {
   }
 }
 
-const streamed = function ({ value }) {
+const streamed = function ({ stream }) {
   return {
     type: Types.STREAMED,
-    value
+    stream
   }
 }
 

@@ -31,7 +31,15 @@ export function listen(store) {
 
   client.emitter.on('yakapa/stored', (socketMessage) => {
     const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))
-    store.dispatch(AgentDashboardActions.stored({ from: decompressed.from }))
+    store.dispatch(AgentDashboardActions.stored({
+      from: decompressed.from,
+      extractor: decompressed.extractor
+    }))
+  })
+
+  client.emitter.on('yakapa/streamed', (socketMessage) => {
+    const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))    
+    store.dispatch(AgentDashboardActions.streamed({ stream: decompressed }))
   })
 
 }

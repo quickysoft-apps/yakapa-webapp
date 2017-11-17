@@ -23,20 +23,34 @@ class Container extends React.Component {
     }
   }
 
+  updateStats = () => {
+    if (!this.props.agentListSelection) {
+      return
+    }
+
+    this.props.stream({
+      definition: {
+        name: 'lastPing',
+        tags: [this.props.agentListSelection.tag],
+        extractors: ['status'],
+        selectors: ['ping'],
+        query: {
+          name: 'last',
+          params: {}
+        }
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.updateStats()
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.storedValue && nextProps.storedValue) {
       if (this.props.storedValue.timestamp !== nextProps.storedValue.timestamp) {
         if (nextProps.storedValue.tag === this.props.agentListSelection.tag) {
-          this.props.stream({
-            definition: {
-              tags: [this.props.agentListSelection.tag],
-              select: ['ping'],
-              query: {
-                name: 'last',
-                params: {}
-              }
-            }
-          })
+          this.updateStats()
         }
       }
     }
@@ -44,11 +58,13 @@ class Container extends React.Component {
 
   render() {
 
+    const { agentListSelection, endUserListSelection, ...statProps } = this.props
+
     const panes = [
       {
         menuItem: 'Statistiques', render: () =>
           <Tab.Pane className="basic">
-            <Components.Stats />
+            <Components.Stats {...statProps} />
           </Tab.Pane>
       },
       { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
@@ -65,10 +81,12 @@ class Container extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const lastPing = state.agentDashboard.get('lastPing')
   return {
     agentListSelection: state.agentList.get('selection'),
     endUserListSelection: state.endUserList.get('selection'),
-    storedValue: state.agentDashboard.get('storedValue')
+    storedValue: state.agentDashboard.get('storedValue'),
+    lastPing: lastPing ? lastPing[0].ping : undefined
   }
 }
 
