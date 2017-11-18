@@ -33,7 +33,7 @@ export function listen(store) {
     const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))
     store.dispatch(AgentDashboardActions.stored({
       from: decompressed.from,
-      extractor: decompressed.extractor
+      job: decompressed.job
     }))
   })
 

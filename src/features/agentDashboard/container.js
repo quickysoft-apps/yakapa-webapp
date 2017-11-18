@@ -30,16 +30,19 @@ class Container extends React.Component {
 
     this.props.stream({
       definition: {
-        name: 'lastPing',
+        name: 'pingStats',
         tags: [this.props.agentListSelection.tag],
-        extractors: ['status'],
-        selectors: ['ping'],
-        query: {
+        jobs: ['__yakapa_agent_status__'],        
+        queries: [{
           name: 'last',
-          params: {}
-        }
+          subset: ['ping']          
+        }, {
+          name: 'average',
+          series: 'ping'
+        }]
       }
     })
+    
   }
 
   componentDidMount() {
@@ -58,13 +61,11 @@ class Container extends React.Component {
 
   render() {
 
-    const { agentListSelection, endUserListSelection, ...statProps } = this.props
-
     const panes = [
       {
         menuItem: 'Statistiques', render: () =>
           <Tab.Pane className="basic">
-            <Components.Stats {...statProps} />
+            <Components.Stats pingStats={this.props.pingStats} />
           </Tab.Pane>
       },
       { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
@@ -81,12 +82,12 @@ class Container extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const lastPing = state.agentDashboard.get('lastPing')
+  const pingStats = state.agentDashboard.get('pingStats')
   return {
     agentListSelection: state.agentList.get('selection'),
     endUserListSelection: state.endUserList.get('selection'),
     storedValue: state.agentDashboard.get('storedValue'),
-    lastPing: lastPing ? lastPing[0].ping : undefined
+    pingStats: pingStats
   }
 }
 

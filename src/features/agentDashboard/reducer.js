@@ -15,8 +15,10 @@ export default function reducer(state = initialState, action) {
       })
 
 
-    case Actions.Types.STREAMED:      
-      return state.set(action.stream.name, action.stream.data)
+    case Actions.Types.STREAMED:            
+      return state.set(action.stream.name, {
+        [action.stream.query]: action.stream.data
+      })
 
     default:
       return state
