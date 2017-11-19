@@ -1,7 +1,8 @@
 import { Map } from 'immutable'
 import Actions from './actions'
 
-const initialState = new Map({    
+const initialState = new Map({
+  streams: []  
 })
 
 export default function reducer(state = initialState, action) {
@@ -16,9 +17,7 @@ export default function reducer(state = initialState, action) {
 
 
     case Actions.Types.STREAMED:            
-      return state.set(action.stream.name, {
-        [action.stream.query]: action.stream.data
-      })
+      return state.set(`${action.stream.name}.${action.stream.query}`, action.stream.data)
 
     default:
       return state

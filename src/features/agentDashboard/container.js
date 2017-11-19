@@ -65,7 +65,10 @@ class Container extends React.Component {
       {
         menuItem: 'Statistiques', render: () =>
           <Tab.Pane className="basic">
-            <Components.Stats pingStats={this.props.pingStats} />
+            <Components.Stats 
+              lastPing={this.props.lastPing} 
+              averagePing={this.props.averagePing}
+            />
           </Tab.Pane>
       },
       { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
@@ -81,13 +84,13 @@ class Container extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {
-  const pingStats = state.agentDashboard.get('pingStats')
+function mapStateToProps(state, ownProps) {  
   return {
     agentListSelection: state.agentList.get('selection'),
     endUserListSelection: state.endUserList.get('selection'),
     storedValue: state.agentDashboard.get('storedValue'),
-    pingStats: pingStats
+    lastPing: state.agentDashboard.get('pingStats.last'),
+    averagePing: state.agentDashboard.get('pingStats.average')
   }
 }
 

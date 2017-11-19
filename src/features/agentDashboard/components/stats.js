@@ -6,13 +6,19 @@ import ListItemTemplate from './listItemTemplate'
 class Stats extends React.Component {
 
   static propTypes = {
-    pingStats: PropTypes.object
+    lastPing: PropTypes.array,
+    averagePing: PropTypes.number
   }
 
   render() {
-
-    const lastPing = this.props.pingStats && this.props.pingStats.last ? this.props.pingStats.last[0].ping : '...'
     
+    const lastPing = this.props.lastPing && this.props.lastPing.length > 0 
+      ? `${this.props.lastPing[0].ping} ms`
+      : '...'
+    const averagePing = this.props.averagePing 
+      ? `(x${String.fromCodePoint(0x304)} ${Number(this.props.averagePing).toFixed()} ms)` 
+      : ''
+
     const stats = [
       {
         icon: 'heart',
@@ -28,7 +34,7 @@ class Stats extends React.Component {
       {
         icon: 'dashboard',
         header: 'Réponse au ping',
-        description: `${lastPing} ms`
+        description: `${lastPing} ${averagePing}`
       },
       {
         icon: 'info circle',
