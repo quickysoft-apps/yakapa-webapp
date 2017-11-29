@@ -31,15 +31,12 @@ class Container extends React.Component {
     this.props.stream({
       definition: {
         name: 'pingStats',
+        select: 'LAST("ping"), MEAN("ping")',        
+        measurements: ['__yakapa_agent_status__'],
         tags: [this.props.agentListSelection.tag],
-        jobs: ['__yakapa_agent_status__'],        
-        queries: [{
-          name: 'last',
-          subset: ['ping']          
-        }, {
-          name: 'average',
-          series: 'ping'
-        }]
+        where: null,
+        groupby: null,
+        limit: null
       }
     })
     
