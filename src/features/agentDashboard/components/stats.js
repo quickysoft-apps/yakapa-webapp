@@ -6,18 +6,14 @@ import ListItemTemplate from './listItemTemplate'
 class Stats extends React.Component {
 
   static propTypes = {
-    lastPing: PropTypes.array,
-    averagePing: PropTypes.number
+    status: PropTypes.array
   }
 
   render() {
     
-    const lastPing = this.props.lastPing && this.props.lastPing.length > 0 
-      ? `${this.props.lastPing[0].ping} ms`
-      : '...'
-    const averagePing = this.props.averagePing 
-      ? `(x${String.fromCodePoint(0x304)} ${Number(this.props.averagePing).toFixed()} ms)` 
-      : ''
+    const status = this.props.status && this.props.status.length > 0 ? this.props.status[0] : undefined
+    const lastPing = status ? `${status.lastPing} ms`  : '...'
+    const averagePing = status ? `(x${String.fromCodePoint(0x304)} ${Number(status.averagePing).toFixed()} ms)` : ''
 
     const stats = [
       {

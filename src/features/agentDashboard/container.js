@@ -30,9 +30,9 @@ class Container extends React.Component {
 
     this.props.stream({
       definition: {
-        name: 'pingStats',
-        select: 'LAST("ping"), MEAN("ping")',        
-        measurements: ['__yakapa_agent_status__'],
+        name: 'status',
+        select: 'LAST("ping") AS "lastPing" , MEAN("ping") AS "averagePing"',
+        measurements: ['b3db8784-b773-4c53-a9a1-98a6cca1e7ca'],
         tags: [this.props.agentListSelection.tag],
         where: null,
         groupby: null,
@@ -62,10 +62,7 @@ class Container extends React.Component {
       {
         menuItem: 'Statistiques', render: () =>
           <Tab.Pane className="basic">
-            <Components.Stats 
-              lastPing={this.props.lastPing} 
-              averagePing={this.props.averagePing}
-            />
+            <Components.Stats status = {this.props.status} />
           </Tab.Pane>
       },
       { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
@@ -86,8 +83,7 @@ function mapStateToProps(state, ownProps) {
     agentListSelection: state.agentList.get('selection'),
     endUserListSelection: state.endUserList.get('selection'),
     storedValue: state.agentDashboard.get('storedValue'),
-    lastPing: state.agentDashboard.get('pingStats.last'),
-    averagePing: state.agentDashboard.get('pingStats.average')
+    status: state.agentDashboard.get('status'),    
   }
 }
 
