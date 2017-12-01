@@ -31,7 +31,7 @@ class Container extends React.Component {
     this.props.stream({
       definition: {
         name: 'status',
-        select: 'LAST("ping") AS "lastPing" , MEAN("ping") AS "averagePing"',
+        select: 'LAST("ping") AS "lastPing" , MEAN("ping") AS "averagePing", LAST("trusted") AS "trusted"',
         measurements: ['b3db8784-b773-4c53-a9a1-98a6cca1e7ca'],
         tags: [this.props.agentListSelection.tag],
         where: null,
