@@ -2,11 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Common from '../../../common'
 import ListItemTemplate from './listItemTemplate'
+import moment from 'moment'
+moment.locale('fr')
 
 class Stats extends React.Component {
 
   static propTypes = {
-    status: PropTypes.array
+    status: PropTypes.array,
+    connected: PropTypes.bool
   }
 
   render() {
@@ -14,19 +17,21 @@ class Stats extends React.Component {
     const status = this.props.status && this.props.status.length > 0 ? this.props.status[0] : undefined
     const lastPing = status ? `${status.lastPing} ms`  : '...'
     const averagePing = status ? `(x${String.fromCodePoint(0x304)} ${Number(status.averagePing).toFixed()} ms)` : ''
-    const ready = status ? status.trusted ? 'Prêt' : "En cours d'identification" : '...'
+    const readyness = status ? status.trusted ? 'Prêt' : "En cours d'identification" : '...'
+    const version = status ? status.version : '...'
+    const fromNow = status ?  moment(status.connectionDate).fromNow() : '...'
 
     const stats = [
       {
         icon: 'heart',
         color: 'green',
         header: 'Statut de la connexion',
-        description: ready
+        description: readyness
       },
       {
         icon: 'wait',
         header: 'Dernière connexion effective',
-        description: 'il y a 3 jours'
+        description: fromNow
       },
       {
         icon: 'dashboard',
@@ -36,7 +41,7 @@ class Stats extends React.Component {
       {
         icon: 'info circle',
         header: 'Version',
-        description: '1.7.6'
+        description: version
       }
     ]
 

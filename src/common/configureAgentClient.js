@@ -42,4 +42,8 @@ export function listen(store) {
     store.dispatch(AgentDashboardActions.streamed({ stream: decompressed }))
   })
 
+  client.emitter.on('yakapa/disconnected', (socketMessage) => {
+    store.dispatch(AgentClientActions.disconnected())
+  })
+
 }

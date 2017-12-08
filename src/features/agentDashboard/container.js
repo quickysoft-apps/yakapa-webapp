@@ -31,7 +31,7 @@ class Container extends React.Component {
     this.props.stream({
       definition: {
         name: 'status',
-        select: 'LAST("ping") AS "lastPing" , MEAN("ping") AS "averagePing", LAST("trusted") AS "trusted"',
+        select: 'LAST("ping") AS "lastPing" , MEAN("ping") AS "averagePing", LAST("trusted") AS "trusted", LAST("version") AS "version", LAST("connectionDate") AS "connectionDate"',
         measurements: ['b3db8784-b773-4c53-a9a1-98a6cca1e7ca'],
         tags: [this.props.agentListSelection.tag],
         where: null,
@@ -39,7 +39,7 @@ class Container extends React.Component {
         limit: null
       }
     })
-    
+
   }
 
   componentDidMount() {
@@ -62,7 +62,7 @@ class Container extends React.Component {
       {
         menuItem: 'Statistiques', render: () =>
           <Tab.Pane className="basic">
-            <Components.Stats status = {this.props.status} />
+            <Components.Stats status={this.props.status} connected={this.props.connected} />
           </Tab.Pane>
       },
       { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
@@ -78,12 +78,13 @@ class Container extends React.Component {
 
 }
 
-function mapStateToProps(state, ownProps) {  
+function mapStateToProps(state, ownProps) {
   return {
     agentListSelection: state.agentList.get('selection'),
     endUserListSelection: state.endUserList.get('selection'),
     storedValue: state.agentDashboard.get('storedValue'),
-    status: state.agentDashboard.get('status'),    
+    status: state.agentDashboard.get('status'),
+    connected: state.agentDashboard.get('connected')
   }
 }
 

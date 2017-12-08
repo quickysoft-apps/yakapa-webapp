@@ -1,6 +1,7 @@
 import { Map } from 'immutable'
 import Actions from './actions'
 import moment from 'moment'
+moment.locale('fr')
 
 const initialState = new Map({
   agentUpdatedAfter: moment().format('YYYY-MM-DD')

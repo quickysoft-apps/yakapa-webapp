@@ -3,7 +3,9 @@ import Namespace from './namespace'
 const Types = {
   STORED: `${Namespace}/STORED`,  
   STREAM: `${Namespace}/STREAM`,
-  STREAMED: `${Namespace}/STREAMED`
+  STREAMED: `${Namespace}/STREAMED`,
+  AGENT_DISCONNECTED: `${Namespace}/AGENT_DISCONNECTED`,
+  AGENT_CONNECTED: `${Namespace}/AGENT_CONNECTED`,
 }
 
 const stream = function ({ definition }) {
@@ -27,9 +29,23 @@ const stored = function ({ from }) {
   }  
 }
 
+const agentDisconnected = function () {
+  return {
+    type: Types.AGENT_DISCONNECTED
+  }  
+}
+
+const agentConnected = function () {
+  return {
+    type: Types.AGENT_CONNECTED
+  }  
+}
+
 export default {
   Types,
   stored,
   stream,
-  streamed
+  streamed,
+  agentDisconnected,
+  agentConnected
 }
