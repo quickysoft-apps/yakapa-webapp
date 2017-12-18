@@ -29,6 +29,18 @@ export function listen(store) {
     store.dispatch(AgentClientActions.connected())
   })
 
+  client.emitter.on('yakapa/disconnected', (socketMessage) => {
+    store.dispatch(AgentClientActions.disconnected())
+  })
+
+  client.emitter.on('yakapa/agentDisconnected', (socketMessage) => {
+    store.dispatch(AgentDashboardActions.agentDisconnected())
+  })
+
+  client.emitter.on('yakapa/agentConnected', (socketMessage) => {
+    store.dispatch(AgentDashboardActions.agentConnected())
+  })
+
   client.emitter.on('yakapa/stored', (socketMessage) => {
     const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))
     store.dispatch(AgentDashboardActions.stored({
@@ -42,8 +54,6 @@ export function listen(store) {
     store.dispatch(AgentDashboardActions.streamed({ stream: decompressed }))
   })
 
-  client.emitter.on('yakapa/disconnected', (socketMessage) => {
-    store.dispatch(AgentClientActions.disconnected())
-  })
+  
 
 }
