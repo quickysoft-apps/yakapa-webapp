@@ -2,7 +2,8 @@ import { Map } from 'immutable'
 import Actions from './actions'
 
 const initialState = new Map({
-  streams: []
+  streams: [],
+  connected: false
 })
 
 export default function reducer(state = initialState, action) {
@@ -13,7 +14,7 @@ export default function reducer(state = initialState, action) {
       return state.set('storedValue', {
         timestamp: new Date().toJSON().slice(0, 19),
         tag: action.from
-      })
+      }).set('connected', true)
 
     case Actions.Types.STREAMED:
       return state.set(`${action.stream.name}`, action.stream.data)
