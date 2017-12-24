@@ -17,14 +17,15 @@ class Stats extends React.Component {
     const status = this.props.status && this.props.status.length > 0 ? this.props.status[0] : undefined
     const lastPing = status ? `${status.lastPing} ms`  : '...'
     const averagePing = status ? `(x${String.fromCodePoint(0x304)} ${Number(status.averagePing).toFixed()} ms)` : ''
-    const readyness = status ? status.trusted ? 'Prêt' : "En cours d'identification" : '...'
+    const readyness = this.props.connected ? status ? status.trusted ? 'Prêt' : "En cours d'identification" : '...' : 'Déconnecté'
+    const heartColor = this.props.connected ? status ? status.trusted ? 'green' : "orange" : 'grey' : 'grey'
     const version = status ? status.version : '...'
     const fromNow = status ?  moment(status.connectionDate).fromNow() : '...'
 
     const stats = [
       {
         icon: 'heart',
-        color: 'green',
+        color: heartColor,
         header: 'Statut de la connexion',
         description: readyness
       },
