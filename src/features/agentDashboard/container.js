@@ -65,7 +65,7 @@ class Container extends React.Component {
             <Components.Stats status={this.props.status} connected={this.props.connected} />
           </Tab.Pane>
       },
-      { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings /></Tab.Pane> },
+      { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings nickName={this.props.agentListSelection.nickname} /></Tab.Pane> },
       { menuItem: 'Tâches', render: () => <Tab.Pane className="basic">Liste des tâches</Tab.Pane> },
     ]
 
@@ -81,7 +81,7 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     agentListSelection: state.agentList.get('selection'),
-    endUserListSelection: state.endUserList.get('selection'),
+    endUserListSelection: state.endUserList.get('selection'),    
     storedValue: state.agentDashboard.get('storedValue'),
     status: state.agentDashboard.get('status'),
     connected: state.agentDashboard.get('connected')

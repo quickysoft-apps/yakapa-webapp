@@ -1,10 +1,15 @@
 import React from 'react'
 import { Item, Radio, Form } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 class Settings extends React.Component {
 
+  static propTypes = {
+    nickName: PropTypes.string
+  }
 
-  render() {
+  render() {  
+
     return (
       <Item.Group divided>
         <Item>
@@ -17,7 +22,7 @@ class Settings extends React.Component {
             <Item.Extra>
               <Form method='post'>
                 <Form.Field width="eight">                  
-                  <input type="text" name="identifier" placeholder='Agent Secret 007' required />
+                  <input type="text" name="identifier" placeholder='Agent Secret 007' required value={this.props.nickName}></input>
                 </Form.Field>
                 <Form.Group>
                   <Form.Button primary type='submit'>Enregistrer</Form.Button>
