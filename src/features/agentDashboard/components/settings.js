@@ -6,7 +6,8 @@ class Settings extends React.Component {
 
   static propTypes = {
     nickName: PropTypes.string,
-    tag: PropTypes.string
+    tag: PropTypes.string,
+    changeSettings: PropTypes.func
   }
 
   _handleSubmit = (e, p) => {
