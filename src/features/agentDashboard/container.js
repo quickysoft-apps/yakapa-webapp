@@ -65,7 +65,7 @@ class Container extends React.Component {
             <Components.Stats status={this.props.status} connected={this.props.connected} />
           </Tab.Pane>
       },
-      { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings nickName={this.props.agentListSelection.nickname} /></Tab.Pane> },
+      { menuItem: 'Configuration', render: () => <Tab.Pane className="basic"><Components.Settings tag={this.props.agentListSelection.tag} nickName={this.props.agentListSelection.nickname} /></Tab.Pane> },
       { menuItem: 'Tâches', render: () => <Tab.Pane className="basic">Liste des tâches</Tab.Pane> },
     ]
 

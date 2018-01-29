@@ -5,14 +5,17 @@ import PropTypes from 'prop-types'
 class Settings extends React.Component {
 
   static propTypes = {
-    nickName: PropTypes.string
+    nickName: PropTypes.string,
+    tag: PropTypes.string
   }
-  
+
   _handleSubmit = (e, p) => {
     e.preventDefault()
     const form = e.target
-    console.log('----', form.identifier.value)
-    //Appel action
+    this.props.changeSettings({
+      settings: { nickname: form.identifier.value },
+      to: this.props.tag
+    })
   }
 
   render() {

@@ -6,6 +6,7 @@ const Types = {
   STREAMED: `${Namespace}/STREAMED`,
   AGENT_DISCONNECTED: `${Namespace}/AGENT_DISCONNECTED`,
   AGENT_CONNECTED: `${Namespace}/AGENT_CONNECTED`,
+  CHANGE_SETTINGS: `${Namespace}/CHANGE_SETTINGS`,
 }
 
 const stream = function ({ definition }) {
@@ -41,11 +42,20 @@ const agentConnected = function () {
   }  
 }
 
+const changeSettings = function ({ settings, to }) {
+  return {
+    type: Types.CHANGE_SETTINGS,
+    settings,
+    to
+  }  
+}
+
 export default {
   Types,
   stored,
   stream,
   streamed,
   agentDisconnected,
-  agentConnected
+  agentConnected,
+  changeSettings
 }

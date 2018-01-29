@@ -19,6 +19,10 @@ export function middleware() {
       client.emit('yakapa/stream', JSON.stringify(action.definition))
     }
 
+    if (action.type === AgentDashboardActions.Types.CHANGE_SETTINGS) {
+      client.emit('yakapa/changeSettings', JSON.stringify(action.settings), action.to)
+    }
+
     return result
   }
 }
