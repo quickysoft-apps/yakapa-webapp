@@ -81,7 +81,7 @@ class Container extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     agentListSelection: state.agentList.get('selection'),
-    endUserListSelection: state.endUserList.get('selection'),    
+    endUserListSelection: state.endUserList.get('selection'),
     storedValue: state.agentDashboard.get('storedValue'),
     status: state.agentDashboard.get('status'),
     connected: state.agentDashboard.get('connected')

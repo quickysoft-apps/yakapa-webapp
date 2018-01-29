@@ -7,8 +7,15 @@ class Settings extends React.Component {
   static propTypes = {
     nickName: PropTypes.string
   }
+  
+  _handleSubmit = (e, p) => {
+    e.preventDefault()
+    const form = e.target
+    console.log('----', form.identifier.value)
+    //Appel action
+  }
 
-  render() {  
+  render() {
 
     return (
       <Item.Group divided>
@@ -20,9 +27,9 @@ class Settings extends React.Component {
             final qui possède cet agent.
           </Item.Description>
             <Item.Extra>
-              <Form method='post'>
-                <Form.Field width="eight">                  
-                  <input type="text" name="identifier" placeholder='Agent Secret 007' required value={this.props.nickName}></input>
+              <Form method='post' onSubmit={this._handleSubmit} >
+                <Form.Field width="eight">
+                  <input type="text" name="identifier" placeholder='Agent Secret 007' required defaultValue={this.props.nickName}></input>
                 </Form.Field>
                 <Form.Group>
                   <Form.Button primary type='submit'>Enregistrer</Form.Button>
