@@ -7,14 +7,14 @@ class Settings extends React.Component {
   static propTypes = {
     nickName: PropTypes.string,
     tag: PropTypes.string,
-    changeSettings: PropTypes.func
+    remoteChangeConfiguration: PropTypes.func
   }
 
   _handleSubmit = (e, p) => {
     e.preventDefault()
     const form = e.target
-    this.props.changeSettings({
-      settings: { nickname: form.identifier.value },
+    this.props.remoteChangeConfiguration({
+      configuration: { nickname: form.identifier.value },
       to: this.props.tag
     })
   }

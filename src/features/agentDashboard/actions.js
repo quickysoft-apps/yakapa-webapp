@@ -42,9 +42,9 @@ const agentConnected = function () {
   }  
 }
 
-const changeSettings = function ({ settings, to }) {
+const remoteChangeConfiguration = function ({ settings, to }) {
   return {
-    type: Types.CHANGE_SETTINGS,
+    type: Types.REMOTE_CHANGE_CONFIGURATION,
     settings,
     to
   }  
@@ -57,5 +57,5 @@ export default {
   streamed,
   agentDisconnected,
   agentConnected,
-  changeSettings
+  remoteChangeConfiguration
 }

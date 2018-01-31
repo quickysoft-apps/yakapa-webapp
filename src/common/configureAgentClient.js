@@ -19,8 +19,8 @@ export function middleware() {
       client.emit('yakapa/stream', JSON.stringify(action.definition))
     }
 
-    if (action.type === AgentDashboardActions.Types.CHANGE_SETTINGS) {
-      client.emit('yakapa/changeSettings', JSON.stringify(action.settings), action.to)
+    if (action.type === AgentDashboardActions.Types.REMOTE_CHANGE_CONFIGURATION) {
+      client.emit('yakapa/remoteChangeConfiguration', JSON.stringify(action.configuration), action.to)
     }
 
     return result

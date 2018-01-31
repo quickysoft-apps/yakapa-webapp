@@ -68,7 +68,7 @@ class Container extends React.Component {
       {
         menuItem: 'Configuration', render: () => <Tab.Pane className="basic">
           <Components.Settings
-            changeSettings={this.props.changeSettings}
+            remoteChangeConfiguration={this.props.remoteChangeConfiguration}
             tag={this.props.agentListSelection.tag}
             nickName={this.props.agentListSelection.nickname} />
         </Tab.Pane>
