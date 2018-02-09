@@ -11,12 +11,13 @@ class Settings extends React.Component {
     remoteChangeConfiguration: PropTypes.func
   }
 
-  _handleSubmit = (e, p) => {
+  _handleSubmit = (e) => {
     e.preventDefault()
-    const form = e.target
+    const form = e.target;
+    const email = this.props.email;
     this.props.remoteChangeConfiguration({
       configuration: { 
-        email: this.props.email,
+        email,
         nickname: form.identifier.value 
       },
       to: this.props.tag
