@@ -7,6 +7,7 @@ class Settings extends React.Component {
   static propTypes = {
     nickName: PropTypes.string,
     tag: PropTypes.string,
+    email: PropTypes.string,
     remoteChangeConfiguration: PropTypes.func
   }
 
@@ -14,7 +15,10 @@ class Settings extends React.Component {
     e.preventDefault()
     const form = e.target
     this.props.remoteChangeConfiguration({
-      configuration: { nickname: form.identifier.value },
+      configuration: { 
+        email: this.props.email,
+        nickname: form.identifier.value 
+      },
       to: this.props.tag
     })
   }

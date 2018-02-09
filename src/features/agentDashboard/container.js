@@ -70,6 +70,7 @@ class Container extends React.Component {
           <Components.Settings
             remoteChangeConfiguration={this.props.remoteChangeConfiguration}
             tag={this.props.agentListSelection.tag}
+            email={this.props.endUserListSelection.email}
             nickName={this.props.agentListSelection.nickname} />
         </Tab.Pane>
       },
