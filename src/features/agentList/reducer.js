@@ -17,6 +17,13 @@ export default function reducer(state = initialState, action) {
         nickname: action.nickname
       })
 
+      case Actions.Types.REMOTE_CONFIGURATION_CHANGED:
+      return state.set('selection', {
+        tag: action.from,
+        nickname: action.configuration.nickname
+      })
+
+
     default:
       return state
   }

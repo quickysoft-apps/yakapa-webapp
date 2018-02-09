@@ -78,7 +78,7 @@ class Container extends React.Component {
     ]
 
     return (
-      <Layout>
+      <Layout>   
         <Tab menu={{ stackable: true, secondary: true, pointing: true }} panes={panes} />
       </Layout >
     )

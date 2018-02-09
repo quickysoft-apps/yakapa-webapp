@@ -3,7 +3,9 @@ import { Json } from 'yakapa-common'
 import LZString from 'lz-string'
 import AgentClientActions from '../features/agentClient/actions'
 import AgentDashboardActions from '../features/agentDashboard/actions'
+import HeaderActions from '../features/header/actions'
 import Authentication from './authentication'
+import Header from 'semantic-ui-react/dist/commonjs/elements/Header/Header'
 
 const client = new Agent.Client({
   server: 'https://mprj.cloudapp.net',
@@ -56,6 +58,13 @@ export function listen(store) {
   client.emitter.on('yakapa/streamed', (socketMessage) => {
     const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))    
     store.dispatch(AgentDashboardActions.streamed({ stream: decompressed }))
+  })
+
+  client.emitter.on('yakapa/remoteConfigurationChanged', (socketMessage) => {
+    const decompressed = Json.from(LZString.decompressFromUTF16(socketMessage.message))    
+    const configuration = JSON.parse(decompressed)
+    store.dispatch(AgentDashboardActions.remoteConfigurationChanged({ configuration, from: socketMessage.from }))
+    store.dispatch(HeaderActions.setTitle(configuration.nickname))
   })
 
   

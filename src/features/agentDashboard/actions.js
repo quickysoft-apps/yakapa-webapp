@@ -6,7 +6,7 @@ const Types = {
   STREAMED: `${Namespace}/STREAMED`,
   AGENT_DISCONNECTED: `${Namespace}/AGENT_DISCONNECTED`,
   AGENT_CONNECTED: `${Namespace}/AGENT_CONNECTED`,
-  REMOTE_CHANGE_CONFIGURATION: `${Namespace}/REMOTE_CHANGE_CONFIGURATION`,
+  REMOTE_CHANGE_CONFIGURATION: `${Namespace}/REMOTE_CHANGE_CONFIGURATION`
 }
 
 const stream = function ({ definition }) {
@@ -49,6 +49,7 @@ const remoteChangeConfiguration = function ({ configuration, to }) {
     to
   }  
 }
+
 
 export default {
   Types,
