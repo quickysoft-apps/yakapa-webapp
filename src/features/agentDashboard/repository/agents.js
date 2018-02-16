@@ -1,6 +1,5 @@
 import { graphql, compose } from 'react-apollo'
-import subscribeToAgentsByEmailContains from './subscribeToAgentsByEmailContains'
-import findAgentByEndUserEmailContainsAndCreatedAfter from './findAgentByEndUserEmailContainsAndCreatedAfter'
+import subscribeToAgentsByTags from './subscribeToAgentsByTags'
 
 export default compose(
   graphql(findAgentByEndUserEmailContainsAndCreatedAfter, {

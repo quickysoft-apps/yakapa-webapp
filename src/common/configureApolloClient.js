@@ -1,6 +1,5 @@
 import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
-//import { addGraphQLSubscriptions } from 'add-graphql-subscriptions'
 
 const GRAPHCOOL_YAKAPA_ID = 'Yakapa'//'cixri1w220iji0121r8lr0n69'
 
