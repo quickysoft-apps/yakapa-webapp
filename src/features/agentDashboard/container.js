@@ -6,6 +6,7 @@ import Actions from './actions'
 import HeaderActions from '../header/actions'
 import Workflows from '../../workflows/'
 import Components from './components'
+import Repository from './repository'
 import { Tab } from 'semantic-ui-react'
 
 class Container extends React.Component {
@@ -79,6 +80,7 @@ class Container extends React.Component {
 
     return (
       <Layout>   
+        
         <Tab menu={{ stackable: true, secondary: true, pointing: true }} panes={panes} />
       </Layout >
     )

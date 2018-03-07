@@ -1,5 +1,5 @@
-import Agents from './agents'
+import AgentsSubscription from './agents'
 
 export default {
-  Agents
+  AgentsSubscription
 }

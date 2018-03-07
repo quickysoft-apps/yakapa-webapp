@@ -10,6 +10,11 @@
       "integrity": "sha1-18eay6oXRTtmgcgMNLOPyxDEwIw=",
       "optional": true
     },
+    "@types/node": {
+      "version": "9.4.6",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-9.4.6.tgz",
+      "integrity": "sha512-CTUtLb6WqCCgp6P59QintjHWqzf4VL1uPA27bipLAPxFqrtK1gEYllePzTICGqQ8rYsCbpnsNypXjjDzGAAjEQ=="
+    },
     "abab": {
       "version": "1.0.4",
       "resolved": "https://registry.npmjs.org/abab/-/abab-1.0.4.tgz",
@@ -301,6 +306,26 @@
         "whatwg-fetch": "2.0.3"
       }
     },
+    "apollo-link": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/apollo-link/-/apollo-link-1.2.1.tgz",
+      "integrity": "sha512-6Ghf+j3cQLCIvjXd2dJrLw+16HZbWbwmB1qlTc41BviB2hv+rK1nJr17Y9dWK0UD4p3i9Hfddx3tthpMKrueHg==",
+      "requires": {
+        "@types/node": "9.4.6",
+        "apollo-utilities": "1.0.9",
+        "zen-observable-ts": "0.8.8"
+      },
+      "dependencies": {
+        "zen-observable-ts": {
+          "version": "0.8.8",
+          "resolved": "https://registry.npmjs.org/zen-observable-ts/-/zen-observable-ts-0.8.8.tgz",
+          "integrity": "sha512-oGjFvBbAA94uh/HvAwJDwMHtNq4lZRtupJx8XsyreOTYvH8x1ef9hIeH/M+IqiAXtNpglq/Klh5rbpYWEeRSOQ==",
+          "requires": {
+            "zen-observable": "0.7.1"
+          }
+        }
+      }
+    },
     "apollo-link-core": {
       "version": "0.5.4",
       "resolved": "https://registry.npmjs.org/apollo-link-core/-/apollo-link-core-0.5.4.tgz",
@@ -310,6 +335,19 @@
         "graphql-tag": "2.6.0",
         "zen-observable-ts": "0.4.4"
       }
+    },
+    "apollo-link-ws": {
+      "version": "1.0.7",
+      "resolved": "https://registry.npmjs.org/apollo-link-ws/-/apollo-link-ws-1.0.7.tgz",
+      "integrity": "sha512-Ky2/zQuA/UwdORKBVMnYaogB5L9u9HFtCuJNmfeF5F+VBocYLa5v5gaCgo3v1o/6hwXy0HuU/KPRYu3wyUsrtQ==",
+      "requires": {
+        "apollo-link": "1.2.1"
+      }
+    },
+    "apollo-utilities": {
+      "version": "1.0.9",
+      "resolved": "https://registry.npmjs.org/apollo-utilities/-/apollo-utilities-1.0.9.tgz",
+      "integrity": "sha512-6j04GLQr5EM76uzLrGWehXc/uKvvKaFMDD4ru7FzlfKjNAf+g399TRneF/LMyQzkwRaM4atYyPIhIJOruNDV/A=="
     },
     "append-transform": {
       "version": "0.4.0",
@@ -16995,6 +17033,11 @@
       "version": "0.1.2",
       "resolved": "https://registry.npmjs.org/yeast/-/yeast-0.1.2.tgz",
       "integrity": "sha1-AI4G2AlDIMNy28L47XagymyKxBk="
+    },
+    "zen-observable": {
+      "version": "0.7.1",
+      "resolved": "https://registry.npmjs.org/zen-observable/-/zen-observable-0.7.1.tgz",
+      "integrity": "sha512-OI6VMSe0yeqaouIXtedC+F55Sr6r9ppS7+wTbSexkYdHbdt4ctTuPNXP/rwm7GTVI63YBc+EBT0b0tl7YnJLRg=="
     },
     "zen-observable-ts": {
       "version": "0.4.4",
